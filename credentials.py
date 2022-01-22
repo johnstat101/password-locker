@@ -31,3 +31,13 @@ class Credentials:
             if credential.username == username:
                 return credential
 
+    @classmethod
+    def credential_exists(cls,username):
+        """
+        return true if a credential exists
+        """
+        for credential in cls.credentials_list:
+            if credential.username == username:
+                return True
+
+
