@@ -26,7 +26,7 @@ class TestCredentials(unittest.TestCase):
         A test case to test if credential is saved in credentialsList
         """
         self.new_credential.save_credential()
-        self.assertEqual(len(Credentials.credentialsList),1)
+        self.assertEqual(len(Credentials.credentials_list),1)
 
 if __name__ == '__main__':
     unittest.main()
