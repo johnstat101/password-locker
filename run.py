@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 from user import UserAccounts
 from credentials import Credentials
+import random
 
 # *********************** userAccounts Methods ****************************************
 def create_account(username, password):
@@ -101,7 +102,7 @@ def main():
             while True:
                 print(f"{'*'*25} PAGEs INFORMATION {'*'*25}")
                 print(f"Welcome {username}, Please select:")
-                print("1)CREATE NEW PAGE PASSWORD.. e.g twitter\n2)DISPLAY EXISTING PASSWORDs\n3)DELETE PAGE PASSWORD\n4)BACK\n")
+                print("1)CREATE OWN PAGE PASSWORD.. e.g twitter\n2)AUTO_GENERATE PAGE PASSWORD\n3)DISPLAY EXISTING PASSWORDs\n4)DELETE PAGE PASSWORD\n5)BACK\n")
                 user_log = int(input())
 
                 if user_log == 1:
@@ -117,14 +118,27 @@ def main():
                     print(f"page saved\n")
                 
                 elif user_log == 2:
+                    print(f"{'*'*25} AUTO GENERATE PASSWORDs {'*'*25}")
+                    print("Enter Page Name e.g twitter")
+                    print("PAGE: ")
+                    page_name = input()
+                    
+                    # randomly generate 4-digit password
+                    password = ''.join(str(e) for e in random.sample([0,1,2,3,4,5,6,7,8,9],4))
+
+                    # save new password
+                    save_credential(create_credential(page_name,password))
+                    print(f"page saved\n with password: {password}")
+
+                elif user_log == 3:
                     print(f"{'*'*25} DISPLAY PASSWORDs {'*'*25}")
                     if display_credentials():
                         for cred in display_credentials():
                             print(f"{cred.page_name}:{cred.password}")
                     else:
                         print(f"NO PASSWORD FOUND\n")
-                
-                elif user_log == 3:
+
+                elif user_log == 4:
                     print(f"{'*'*25} DELETE PASSWORDs {'*'*25}")
                     print(f"Enter Page you want to delete")
                     print(f"PAGE")
@@ -136,10 +150,10 @@ def main():
                         print(f"page deleted\n")
                     else:
                         print(f"page NOT FOUND\n")
-                
-                elif user_log == 4:
+
+                elif user_log == 5:
                     break
-                
+
                 else:
                     print("Invalid Entry")
 
@@ -152,11 +166,10 @@ def main():
             password = input()
 
             if account_exists(username) and find_account(username).password == password:
-
                 while True:
                     print(f"{'*'*25} PAGEs INFORMATION {'*'*25}")
                     print(f"Welcome {username}, Please select:")
-                    print("1)CREATE NEW PAGE PASSWORD.. e.g twitter\n2)DISPLAY EXISTING PASSWORDs\n3)DELETE PAGE PASSWORD\n4)BACK\n")
+                    print("1)CREATE OWN PAGE PASSWORD.. e.g twitter\n2)AUTO_GENERATE PAGE PASSWORD\n3)DISPLAY EXISTING PASSWORDs\n4)DELETE PAGE PASSWORD\n5)BACK\n")
                     user_log = int(input())
 
                     if user_log == 1:
@@ -172,6 +185,19 @@ def main():
                         print(f"page saved\n")
                     
                     elif user_log == 2:
+                        print(f"{'*'*25} AUTO GENERATE PASSWORDs {'*'*25}")
+                        print("Enter Page Name e.g twitter")
+                        print("PAGE: ")
+                        page_name = input()
+
+                        # randomly generate 4-digit password
+                        password = ''.join(str(e) for e in random.sample([0,1,2,3,4,5,6,7,8,9],4))
+
+                        # save new password
+                        save_credential(create_credential(page_name,password))
+                        print(f"page saved\n with password: {password}")
+                    
+                    elif user_log == 3:
                         print(f"{'*'*25} DISPLAY PASSWORDs {'*'*25}")
                         if display_credentials():
                             for cred in display_credentials():
@@ -179,7 +205,7 @@ def main():
                         else:
                             print(f"NO PASSWORD FOUND\n")
                     
-                    elif user_log == 3:
+                    elif user_log == 4:
                         print(f"{'*'*25} DELETE PASSWORDs {'*'*25}")
                         print(f"Enter Page you want to delete")
                         print(f"PAGE")
@@ -192,7 +218,7 @@ def main():
                         else:
                             print(f"page NOT FOUND\n")
                     
-                    elif user_log == 4:
+                    elif user_log == 5:
                         break
                     
                     else:
