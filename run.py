@@ -53,6 +53,12 @@ def main():
             print("Create a User Name ...")
             username = input()
             print("Create a Password ...")
+            password = input()
+
+            save_account(create_account(username,password))
+            print(f"{username} account has been created")
+
+
 
 
         elif short_code == 'lc':
