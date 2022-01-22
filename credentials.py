@@ -21,3 +21,9 @@ class Credentials:
         remove credential
         """
         Credentials.credentials_list.remove(self)
+    
+    def find_credentials_by_username(self):
+        """
+        find credentials by usename(unique identifier)
+        """
+        
