@@ -1,4 +1,3 @@
-import imp
 import unittest # Importing the unittest module
 from credentials import Credentials # Importing the contact class
 
@@ -9,7 +8,7 @@ class TestCredentials(unittest.TestCase):
         unittest.TestCase: TestCase class that helps in creating test cases
     """
 
-    def setUP(self):
+    def setUp(self):
         """
         Set up method to run before each test cases.
         """
@@ -21,3 +20,13 @@ class TestCredentials(unittest.TestCase):
         """
         self.assertEqual(self.new_credential.username,"johnKim")
         self.assertEqual(self.new_credential.password,"1234")
+    
+    def test_save_credential(self):
+        """
+        A test case to test if credential is saved in credentialsList
+        """
+        self.new_credential.save_credential()
+        self.assertEqual(len(Credentials.credentialsList),1)
+
+if __name__ == '__main__':
+    unittest.main()
