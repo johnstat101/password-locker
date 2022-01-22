@@ -3,11 +3,11 @@ class Credentials:
     """
     class that generates new instances of password
     """
-    credentials_list = [] #empty credentials list
+    credentials_list = [] # empty credentials list
 
-    def __init__(self,username,password):
+    def __init__(self,page_name,password):
         # initialize
-        self.username = username
+        self.page_name = page_name
         self.password = password
 
     def save_credential(self):
@@ -23,21 +23,21 @@ class Credentials:
         Credentials.credentials_list.remove(self)
     
     @classmethod
-    def find_credentials_by_username(cls,username):
+    def find_credentials_by_page_name(cls,page_name):
         """
         find credentials by usename(unique identifier)
         """
         for credential in cls.credentials_list:
-            if credential.username == username:
+            if credential.page_name == page_name:
                 return credential
 
     @classmethod
-    def credential_exists(cls,username):
+    def credential_exists(cls,page_name):
         """
         return true if a credential exists
         """
         for credential in cls.credentials_list:
-            if credential.username == username:
+            if credential.page_name == page_name:
                 return True
     
     @classmethod

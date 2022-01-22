@@ -12,13 +12,13 @@ class TestCredentials(unittest.TestCase):
         """
         Set up method to run before each test cases.
         """
-        self.new_credential = Credentials("johnKim", "1234") #create an object of type Credentials
+        self.new_credential = Credentials("facebook", "1234") #create an object of type Credentials
 
     def test_init(self):
         """
         Test whether the object is initialized correctly
         """
-        self.assertEqual(self.new_credential.username,"johnKim")
+        self.assertEqual(self.new_credential.page_name,"facebook")
         self.assertEqual(self.new_credential.password,"1234")
     
     def test_save_credential(self):
@@ -39,7 +39,7 @@ class TestCredentials(unittest.TestCase):
         test saving of multiple credentials
         """
         self.new_credential.save_credential()
-        test_credential = Credentials("kimJohn","4321")
+        test_credential = Credentials("twitter","4321")
         test_credential.save_credential()
         self.assertEqual(len(Credentials.credentials_list),2)
     
@@ -48,20 +48,20 @@ class TestCredentials(unittest.TestCase):
         test case for credentials deletion
         """
         self.new_credential.save_credential()
-        test_credential = Credentials("kimJohn", "4321")
+        test_credential = Credentials("twitter", "4321")
         test_credential.save_credential()
         self.new_credential.delete_credential()
         self.assertEqual(len(Credentials.credentials_list),1)
     
-    def test_find_credentials_by_username(self):
+    def test_find_credentials_by_page_name(self):
         """
-        test case to search for user credentials by username
+        test case to search for user credentials by page_name
         """
         self.new_credential.save_credential()
-        test_credential = Credentials("kimJohn", "4321")
+        test_credential = Credentials("twitter", "4321")
         test_credential.save_credential()
 
-        found_credential = Credentials.find_credentials_by_username("kimJohn")
+        found_credential = Credentials.find_credentials_by_page_name("twitter")
         self.assertEqual(found_credential.password, test_credential.password)
     
     def test_credential_exist(self):
@@ -69,10 +69,10 @@ class TestCredentials(unittest.TestCase):
         return true if a contact exists
         """
         self.new_credential.save_credential()
-        test_credential = Credentials("kimJohn", "4321")
+        test_credential = Credentials("twitter", "4321")
         test_credential.save_credential()
 
-        credential_exists = Credentials.credential_exists("kimJohn")
+        credential_exists = Credentials.credential_exists("twitter")
         self.assertTrue(credential_exists)
 
     def test_display_credentials(self):
