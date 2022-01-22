@@ -22,8 +22,12 @@ class Credentials:
         """
         Credentials.credentials_list.remove(self)
     
-    def find_credentials_by_username(self):
+    @classmethod
+    def find_credentials_by_username(cls,username):
         """
         find credentials by usename(unique identifier)
         """
-        
+        for credential in cls.credentials_list:
+            if credential.username == username:
+                return credential
+
