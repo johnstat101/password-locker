@@ -3,12 +3,13 @@ class Credentials:
     """
     class that generates new instances of password
     """
-    credentials_list = [] # empty credentials list
 
     def __init__(self,page_name,password):
         # initialize
         self.page_name = page_name
         self.password = password
+
+    credentials_list = [] # empty credentials list
 
     def save_credential(self):
         """

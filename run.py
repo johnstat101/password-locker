@@ -14,13 +14,13 @@ def save_account(account):
     """
     Function to save new account info
     """
-    UserAccounts.save_userAccount(account)
+    account.save_userAccount()
 
 def delete_account(account):
     """
     Function to delete account
     """
-    UserAccounts.delete_userAccount(account)
+    account.delete_userAccount()
 
 def find_account(username):
     """
@@ -38,44 +38,7 @@ def display_accounts():
     """
     Function to display all available accounts
     """
-    UserAccounts.display_userAccounts()
-
-def create_account(username, password):
-    """
-    Function to create new account
-    """
-    new_account = UserAccounts(username,password)
-    return new_account
-
-def save_account(account):
-    """
-    Function to save new account info
-    """
-    UserAccounts.save_userAccount(account)
-
-def delete_account(account):
-    """
-    Function to delete account
-    """
-    UserAccounts.delete_userAccount(account)
-
-def find_account(username):
-    """
-    Function to search for account
-    """
-    return UserAccounts.find_userAccounts_by_username(username)
-
-def account_exists(username):
-    """
-    Function to check if account exists
-    """
-    return UserAccounts.userAccount_exists(username)
-
-def display_accounts():
-    """
-    Function to display all available accounts
-    """
-    UserAccounts.display_userAccounts()
+    return UserAccounts.display_userAccounts()
 
 # *********************** Credentials Methods ***************************************
 def create_credential(page_name, password):
@@ -89,13 +52,13 @@ def save_credential(credential):
     """
     Function to save new credential info
     """
-    Credentials.save_credential(credential)
+    credential.save_credential()
 
 def delete_credential(credential):
     """
     Function to delete credential
     """
-    Credentials.delete_credential(credential)
+    credential.delete_credential()
 
 def find_credential(page_name):
     """
@@ -113,7 +76,7 @@ def display_credentials():
     """
     Function to display all available credentials
     """
-    Credentials.display_credentials()
+    return Credentials.display_credentials()
 
 
 # ****************************** main() ***************************************
@@ -135,6 +98,51 @@ def main():
             save_account(create_account(username,password))
             print(f"'{username}' account has been created\n")
 
+            while True:
+                print(f"{'*'*25} PAGEs INFORMATION {'*'*25}")
+                print(f"Welcome {username}, Please select:")
+                print("1)CREATE NEW PAGE PASSWORD.. e.g twitter\n2)DISPLAY EXISTING PASSWORDs\n3)DELETE PAGE PASSWORD\n4)BACK\n")
+                user_log = int(input())
+
+                if user_log == 1:
+                    print(f"{'*'*25} SAVE PAGE PASSWORDs {'*'*25}")
+                    print("Enter Page Name and Password: e.g twitter")
+                    print("PAGE: ")
+                    page_name = input()
+                    print("PASSWORD: ")
+                    password = input()
+
+                    # save new password
+                    save_credential(create_credential(page_name,password))
+                    print(f"page saved\n")
+                
+                elif user_log == 2:
+                    print(f"{'*'*25} DISPLAY PASSWORDs {'*'*25}")
+                    if display_credentials():
+                        for cred in display_credentials():
+                            print(f"{cred.page_name}:{cred.password}")
+                    else:
+                        print(f"NO PASSWORD FOUND\n")
+                
+                elif user_log == 3:
+                    print(f"{'*'*25} DELETE PASSWORDs {'*'*25}")
+                    print(f"Enter Page you want to delete")
+                    print(f"PAGE")
+                    page_name = input()
+                    if credential_exists(page_name):
+                        page_name = (page_name)
+                        delete_credential(page_name)
+                        # delete page passwords
+                        print(f"page deleted\n")
+                    else:
+                        print(f"page NOT FOUND\n")
+                
+                elif user_log == 4:
+                    break
+                
+                else:
+                    print("Invalid Entry")
+
         elif short_code == 2:
             print(f"{'*'*25} LOGIN {'*'*25}")
             print("Enter Your Login Information")
@@ -146,8 +154,9 @@ def main():
             if account_exists(username) and find_account(username).password == password:
 
                 while True:
+                    print(f"{'*'*25} PAGEs INFORMATION {'*'*25}")
                     print(f"Welcome {username}, Please select:")
-                    print("1)CREATE NEW PAGE PASSWORD.. e.g twitter\n2)DELETE PAGE PASSWORD\n3)DISPLAY EXISTING PASSWORDs\n4)EXIT\n")
+                    print("1)CREATE NEW PAGE PASSWORD.. e.g twitter\n2)DISPLAY EXISTING PASSWORDs\n3)DELETE PAGE PASSWORD\n4)BACK\n")
                     user_log = int(input())
 
                     if user_log == 1:
@@ -161,8 +170,16 @@ def main():
                         # save new password
                         save_credential(create_credential(page_name,password))
                         print(f"page saved\n")
-
+                    
                     elif user_log == 2:
+                        print(f"{'*'*25} DISPLAY PASSWORDs {'*'*25}")
+                        if display_credentials():
+                            for cred in display_credentials():
+                                print(f"{cred.page_name}:{cred.password}")
+                        else:
+                            print(f"NO PASSWORD FOUND\n")
+                    
+                    elif user_log == 3:
                         print(f"{'*'*25} DELETE PASSWORDs {'*'*25}")
                         print(f"Enter Page you want to delete")
                         print(f"PAGE")
@@ -174,14 +191,6 @@ def main():
                             print(f"page deleted\n")
                         else:
                             print(f"page NOT FOUND\n")
-                    
-                    elif user_log == 3:
-                        print(f"{'*'*25} DISPLAY PASSWORDs {'*'*25}")
-                        if display_credentials():
-                            for cred in display_credentials():
-                                print(f"{cred.page_name}:{cred.password}")
-                        else:
-                            print(f"NO PASSWORD FOUND\n")
                     
                     elif user_log == 4:
                         break

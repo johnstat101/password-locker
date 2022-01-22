@@ -3,12 +3,13 @@ class UserAccounts:
     """
     class that generates new instances of user accounts
     """
-    userAccounts_list = [] # empty userAccounts list
 
     def __init__(self,username,password):
         # initialize
         self.username = username
         self.password = password
+
+    userAccounts_list = [] # empty userAccounts list
 
     def save_userAccount(self):
         """
